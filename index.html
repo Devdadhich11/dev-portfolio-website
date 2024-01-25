@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Dadhich - Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+            background: #000 url('./background.jpeg') fixed;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            text-align: center;
+            padding: 15px;
+            box-sizing: border-box;
+            transition: background-color 0.5s;
+        }
+
+        nav a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            cursor: pointer;
+            transition: color 0.5s;
+        }
+
+        nav a:hover {
+            color: #e9af31;
+        }
+
+        .home, .about, .projects, .contact {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .home {
+            background: url('./mainpic.jpg') no-repeat center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .name {
+            font-size: 5em;
+            margin-bottom: 10px;
+            color: #f8f8f8; /* Lighter shade towards white */
+        }
+
+        .tagline {
+            font-size: 1.6em;
+            margin-bottom: 300px;
+            color: #f8f8f8; /* Lighter shade towards white */
+        }
+
+        .home-buttons {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .home-buttons button {
+            background-color: #e9af31;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .home-buttons button:hover {
+            background-color: #fff;
+            color: #e9af31;
+        }
+
+        .about, .projects, .contact {
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .headingss {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 42px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .headingss:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 80px;
+            height: 4px;
+            background-color: #e9af31;
+            transform: translateX(-50%);
+        }
+
+        .projects {
+            text-align: center;
+            display: box;
+        }
+
+        .project-container {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 20px;
+          
+            margin-inline: 90px;
+        }
+
+        .project-box {
+            flex: 0 0 30%; /* Each box takes up 30% of the container width */
+            background-color: rgba(57, 57, 57, 0.664);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px;
+            /* Adjust margin as needed for spacing */
+            display: inline-block;
+            max-height: 350px; /* Set max height for the project box */
+            overflow-y: auto; /* Enable vertical scroll for overflow content */
+            scrollbar-width: thin; /* Hide scrollbar in Firefox */
+            -ms-overflow-style: none; /* Hide scrollbar in IE and Edge */
+            position: relative;
+        }
+
+        .project-box::-webkit-scrollbar {
+            width: 2px; /* Set width for the scrollbar in Webkit browsers */
+        }
+
+        .photo-box {
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+            max-height: 600px; /* Set max height for the photo box */
+            border-radius: 10px;
+        }
+
+        .photo-box img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s;
+        }
+
+        .photo-box:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-box a {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .scroll-text {
+            color: #e9af31;
+            font-size: 12px;
+        }
+
+        .contact {
+            padding-top: 400px;
+        }
+
+        .footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            margin-top: 300px;
+            margin-bottom: 0px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .follow-me {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .follow-me a {
+            color: #e9af31;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .follow-me a:hover {
+            text-decoration: underline;
+            transform: scale(1.1);
+        }
+
+        .form-response {
+            color: #e9af31;
+            margin-top: 10px;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            max-width: 500px; /* Increased width of the form */
+            margin: auto;
+        }
+
+        button[type="button"] {
+            background-color: #e9af31;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button[type="button"]:hover {
+            background-color: #d18f27;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: auto;
+            background-color: #fff;
+            color: #000;
+            border-radius: 10px;
+            padding: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            padding-inline: 120px;
+            padding-bottom: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact Me</a>
+    </nav>
+
+    <div class="home" id="home">
+        <div class="overlay"></div>
+        <div class="name">Dev Dadhich</div>
+        <div class="tagline">SHOOT | DESIGN | EDIT | POST</div>
+        <div class="home-buttons">
+            <button onclick="redirectToMail()">Contact Me</button>
+            <button onclick="redirectToInstagram()">Follow Me</button>
+        </div>
+    </div>
+
+    <div class="about" id="about">
+        <p class="headingss">ABOUT </p>
+        <p>Welcome to my portfolio! I am Dev Dadhich, a college student involved in designing posts, and video editing<br>
+            When it comes to design, I believe in simplicity with a creative edge. 
+            I enjoy turning ideas into visually harmonious elements.<br>
+            Beyond that, my passion lies in video editing, where I weave stories through visuals and sound.<br>
+             Currently on a journey of constant learning<br>
+            I invite you to explore my work. If you appreciate innovation and love the idea of creative collaboration.<br><br>let's connect and bring ideas to life!</p>
+        <!-- Add more content here -->
+    </div>
+
+    <div class="projects" id="projects">
+        <p class="headingss">PROJECTS</p>
+        <div class="project-container">
+            <div class="project-box">
+                <h2>Videos</h2>
+                <div class="scroll-text">Scroll for more</div>
+                <div class="photo-box">
+                    <img src="./video1.jpg" alt="Video Cover">
+                    <a href="https://www.instagram.com/reel/C1b7NQKLI0Y/" target="_blank"></a>
+                </div>
+                <div class="photo-box">
+                    <img src="./video2.jpg" alt="Video Cover">
+                    <a href="https://www.instagram.com/reel/Cs69aILBrHL/" target="_blank"></a>
+                </div>
+               
+            </div>
+            <div class="project-box">
+                <h2>Designs & posts</h2>
+                <div class="scroll-text">Scroll for more</div>
+                <div class="photo-box">
+                    <img src="./design2.webp" alt="Design Cover">
+                    <a href="https://www.instagram.com/p/CeGvYueq4gf/" target="_blank"></a>
+                </div>
+                <div class="photo-box">
+                    <img src="./design1.webp" alt="Design Cover">
+                    <a href="https://www.instagram.com/p/CddvvEdhD80/" target="_blank"></a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="contact" id="contact">
+        <p class="headingss">CONTACT ME</p>
+        <div class="form-container">
+            <form id="contactForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br>
+
+                <label for="work">Work:</label>
+                <input type="text" id="work" name="work" required><br>
+
+                <label for="comment">Comment:</label>
+                <textarea id="comment" name="comment" rows="4" required></textarea><br>
+
+                <button type="button" onclick="submitForm()">Submit</button>
+            </form>
+            <div id="formResponse" class="form-response"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="follow-me">
+            Follow me on:
+            <a href="https://www.instagram.com/hie.dev/" target="_blank"><img src="./instagram-logo-24.png"></a>
+            <a href="mailto:roadsidewalk@gmail.com"><img src="./gmail-logo-24.png"></a>
+            <a href="https://in.pinterest.com/dadhich2004dev/" target="_blank"><img src="./pinterest-alt-logo-24.png"></a>
+            <a href="https://www.linkedin.com/in/dev-dadhich11/" target="_blank"><img src="./linkedin-logo-24.png"></a>
+        </div>
+    </div>
+
+    <script>
+        function submitForm() {
+            // Simulating form submission
+            document.getElementById('formResponse').innerHTML = 'Form submitted! Thank you.';
+        }
+
+        function redirectToMail() {
+            window.location.href = 'mailto:dadhich2004dev@gmail.com';
+        }
+
+        function redirectToInstagram() {
+            window.location.href = 'https://www.instagram.com/hie.dev/';
+        }
+
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
